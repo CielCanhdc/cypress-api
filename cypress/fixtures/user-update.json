@@ -1,0 +1,11 @@
+{
+    "path": "/api/user/update",
+    "method": "POST",
+    "payload": {
+        "city": "string",
+        "mail": "string",
+        "name": "string",
+        "phone_number": "string"
+    },
+    "resp": {}
+}

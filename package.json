@@ -1,0 +1,25 @@
+{
+  "name": "cypress-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "report:clean": "rm -rf cypress/report/mocha-report/",
+    "report:init": "marge --reportDir cypress/report/mocha-report/ cypress/report/mocha-report/cypress-tests-report.json",
+    "report:merge": "mochawesome-merge cypress/report/mocha-report/*.json > cypress/report/mocha-report/cypress-tests-report.json",
+    "report:generate": "npm run report:merge && npm run report:init",
+    "test:run": "npm run report:clean && cypress run --reporter mochawesome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "cypress": "^13.5.1"
+  },
+  "dependencies": {
+    "cypress-mochawesome-reporter": "^3.7.0",
+    "cypress-plugin-api": "^2.11.1",
+    "mochawesome-merge": "^4.3.0"
+  }
+}

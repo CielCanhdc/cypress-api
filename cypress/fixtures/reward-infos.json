@@ -1,0 +1,19 @@
+{
+    "path": "/api/reward/get_infos",
+    "method": "GET",
+    "header": null,
+    "payload": {
+        "city": "string",
+        "mail": "string",
+        "name": "string",
+        "phone_number": "string"
+    },
+    "resp": {
+        "payload": {
+            "metadata_infos": {
+                "tag_name": "Đại sứ Free Fire"
+            }
+        }
+    },
+    "schema": {}
+}
