@@ -1,0 +1,4937 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "BackendService",
+    "version": "2023-08-11"
+  },
+  "paths": {
+    "/api/badges": {
+      "get": {
+        "operationId": "GetUserBadges",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetUserBadges 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "badges": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "badge": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "imageUrl": {
+                              "type": "string"
+                            },
+                            "createdBy": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "accquiredOn": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/badges/me": {
+      "get": {
+        "operationId": "GetMyBadges",
+        "responses": {
+          "200": {
+            "description": "GetMyBadges 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "badges": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "badge": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "imageUrl": {
+                              "type": "string"
+                            },
+                            "createdBy": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "accquiredOn": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    },
+                    "pinnedBadgeIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "badges",
+                    "pinnedBadgeIds"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/badges/me/pin": {
+      "post": {
+        "operationId": "SaveMyPinBadges",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bagdesIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "bagdesIds"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SaveMyPinBadges 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pinnedBadgeIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "pinnedBadgeIds"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/currencies/me": {
+      "get": {
+        "operationId": "GetMyCurrency",
+        "responses": {
+          "200": {
+            "description": "GetMyCurrency 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userCurrency": {
+                      "type": "object",
+                      "properties": {
+                        "userSendableCurrency": {
+                          "type": "object",
+                          "properties": {
+                            "sendableCurrency": {
+                              "type": "number"
+                            },
+                            "expireTime": {
+                              "type": "number",
+                              "format": "double"
+                            }
+                          }
+                        },
+                        "userExchangableCurrency": {
+                          "type": "object",
+                          "properties": {
+                            "exchangeableCurrency": {
+                              "type": "number"
+                            },
+                            "expiringAmount": {
+                              "type": "number"
+                            },
+                            "expiringOn": {
+                              "type": "number",
+                              "format": "double"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/feeds": {
+      "get": {
+        "operationId": "GetFeed",
+        "parameters": [
+          {
+            "name": "contentCategory",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FEED",
+                "KUDOS",
+                "BADGE",
+                "CURRENCY"
+              ]
+            },
+            "required": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetFeed 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "posts": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "isAdminPost": {
+                          "type": "boolean"
+                        },
+                        "postByUserId": {
+                          "type": "string"
+                        },
+                        "contentSource": {
+                          "type": "object",
+                          "properties": {
+                            "contentId": {
+                              "type": "string"
+                            },
+                            "contentCategory": {
+                              "type": "string",
+                              "enum": [
+                                "FEED",
+                                "KUDOS",
+                                "BADGE",
+                                "CURRENCY"
+                              ]
+                            },
+                            "createdUserId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "imageUrls": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "reactionMap": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "comments": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "postId": {
+                              "type": "string"
+                            },
+                            "content": {
+                              "type": "string"
+                            },
+                            "reactionMap": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "canComment": {
+                          "type": "boolean"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/feeds/comment/reaction": {
+      "delete": {
+        "operationId": "DeleteCommentReaction",
+        "parameters": [
+          {
+            "name": "clientToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "commentId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "reactionType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "LIKE"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DeleteCommentReaction 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateCommentReaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientToken": {
+                    "type": "string"
+                  },
+                  "commentId": {
+                    "type": "string"
+                  },
+                  "reactionType": {
+                    "type": "string",
+                    "enum": [
+                      "LIKE"
+                    ]
+                  }
+                },
+                "required": [
+                  "clientToken",
+                  "commentId",
+                  "reactionType"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "CreateCommentReaction 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/feeds/post": {
+      "put": {
+        "operationId": "CreatePost",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientToken": {
+                    "type": "string"
+                  },
+                  "isAdminPost": {
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "base64Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "base64Images",
+                  "clientToken",
+                  "content",
+                  "isAdminPost"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "CreatePost 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "post": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "isAdminPost": {
+                          "type": "boolean"
+                        },
+                        "postByUserId": {
+                          "type": "string"
+                        },
+                        "contentSource": {
+                          "type": "object",
+                          "properties": {
+                            "contentId": {
+                              "type": "string"
+                            },
+                            "contentCategory": {
+                              "type": "string",
+                              "enum": [
+                                "FEED",
+                                "KUDOS",
+                                "BADGE",
+                                "CURRENCY"
+                              ]
+                            },
+                            "createdUserId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "imageUrls": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "reactionMap": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "comments": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "postId": {
+                              "type": "string"
+                            },
+                            "content": {
+                              "type": "string"
+                            },
+                            "reactionMap": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "canComment": {
+                          "type": "boolean"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/feeds/post/reaction": {
+      "delete": {
+        "operationId": "DeletePostReaction",
+        "parameters": [
+          {
+            "name": "clientToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "postId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "reactionType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "LIKE"
+              ]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DeletePostReaction 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreatePostReaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientToken": {
+                    "type": "string"
+                  },
+                  "postId": {
+                    "type": "string"
+                  },
+                  "reactionType": {
+                    "type": "string",
+                    "enum": [
+                      "LIKE"
+                    ]
+                  }
+                },
+                "required": [
+                  "clientToken",
+                  "postId",
+                  "reactionType"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "CreatePostReaction 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/kudos": {
+      "get": {
+        "operationId": "GetUserKudos",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetUserKudos 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "kudos": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "fromUserId": {
+                          "type": "string"
+                        },
+                        "toUserId": {
+                          "type": "string"
+                        },
+                        "audienceMode": {
+                          "type": "string",
+                          "enum": [
+                            "PUBLIC",
+                            "PRIVATE"
+                          ]
+                        },
+                        "sendableCurrency": {
+                          "type": "number"
+                        },
+                        "hashTags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "imageUrl": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SendKudos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientToken": {
+                    "type": "string"
+                  },
+                  "toUserId": {
+                    "type": "string"
+                  },
+                  "audienceMode": {
+                    "type": "string",
+                    "enum": [
+                      "PUBLIC",
+                      "PRIVATE"
+                    ]
+                  },
+                  "sendableCurrency": {
+                    "type": "number"
+                  },
+                  "hashTags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "base64Image": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "audienceMode",
+                  "clientToken",
+                  "hashTags",
+                  "message",
+                  "sendableCurrency",
+                  "toUserId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SendKudos 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "kudos": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "fromUserId": {
+                          "type": "string"
+                        },
+                        "toUserId": {
+                          "type": "string"
+                        },
+                        "audienceMode": {
+                          "type": "string",
+                          "enum": [
+                            "PUBLIC",
+                            "PRIVATE"
+                          ]
+                        },
+                        "sendableCurrency": {
+                          "type": "number"
+                        },
+                        "hashTags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "imageUrl": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "kudos"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/kudos/me": {
+      "get": {
+        "operationId": "GetMyKudos",
+        "responses": {
+          "200": {
+            "description": "GetMyKudos 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "kudos": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "fromUserId": {
+                          "type": "string"
+                        },
+                        "toUserId": {
+                          "type": "string"
+                        },
+                        "audienceMode": {
+                          "type": "string",
+                          "enum": [
+                            "PUBLIC",
+                            "PRIVATE"
+                          ]
+                        },
+                        "sendableCurrency": {
+                          "type": "number"
+                        },
+                        "hashTags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "imageUrl": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    },
+                    "pinnedKudosIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "kudos",
+                    "pinnedKudosIds"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/kudos/me/toogle-pin": {
+      "post": {
+        "operationId": "ToogleMyPinKudos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "kudosId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kudosId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ToogleMyPinKudos 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/notifications": {
+      "get": {
+        "operationId": "GetNotifications",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetNotifications 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "notifications": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "isRead": {
+                          "type": "boolean"
+                        },
+                        "actorUserId": {
+                          "type": "string"
+                        },
+                        "receiverUserId": {
+                          "type": "string"
+                        },
+                        "contentSource": {
+                          "type": "object",
+                          "properties": {
+                            "contentId": {
+                              "type": "string"
+                            },
+                            "contentCategory": {
+                              "type": "string",
+                              "enum": [
+                                "FEED",
+                                "KUDOS",
+                                "BADGE",
+                                "CURRENCY"
+                              ]
+                            },
+                            "createdUserId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "notificationContentType": {
+                          "type": "string",
+                          "enum": [
+                            "NEW_FEED_POST",
+                            "COMMENT_TO_YOUR_POST",
+                            "REACT_TO_YOUR_POST",
+                            "REACT_TO_YOUR_COMMENT",
+                            "SEND_KUDOS_TO_YOU",
+                            "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                            "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                            "RECEIVE_NEW_BADGE"
+                          ]
+                        },
+                        "data": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/notifications/config": {
+      "get": {
+        "operationId": "GetNotificationsConfig",
+        "responses": {
+          "200": {
+            "description": "GetNotificationsConfig 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "notificationContentTypes": {
+                      "type": "string",
+                      "enum": [
+                        "NEW_FEED_POST",
+                        "COMMENT_TO_YOUR_POST",
+                        "REACT_TO_YOUR_POST",
+                        "REACT_TO_YOUR_COMMENT",
+                        "SEND_KUDOS_TO_YOU",
+                        "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                        "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                        "RECEIVE_NEW_BADGE"
+                      ]
+                    },
+                    "userDeniedNotificationConfig": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "notificationChannel": {
+                          "type": "string",
+                          "enum": [
+                            "SEA_TALK",
+                            "PUSH"
+                          ]
+                        },
+                        "isDenyAll": {
+                          "type": "boolean"
+                        },
+                        "deniedNotificationContentList": {
+                          "type": "string",
+                          "enum": [
+                            "NEW_FEED_POST",
+                            "COMMENT_TO_YOUR_POST",
+                            "REACT_TO_YOUR_POST",
+                            "REACT_TO_YOUR_COMMENT",
+                            "SEND_KUDOS_TO_YOU",
+                            "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                            "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                            "RECEIVE_NEW_BADGE"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/notifications/denied-notification": {
+      "post": {
+        "operationId": "UpdateDeniedNotification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userDeniedNotificationConfig": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "userId": {
+                        "type": "string"
+                      },
+                      "notificationChannel": {
+                        "type": "string",
+                        "enum": [
+                          "SEA_TALK",
+                          "PUSH"
+                        ]
+                      },
+                      "isDenyAll": {
+                        "type": "boolean"
+                      },
+                      "deniedNotificationContentList": {
+                        "type": "string",
+                        "enum": [
+                          "NEW_FEED_POST",
+                          "COMMENT_TO_YOUR_POST",
+                          "REACT_TO_YOUR_POST",
+                          "REACT_TO_YOUR_COMMENT",
+                          "SEND_KUDOS_TO_YOU",
+                          "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                          "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                          "RECEIVE_NEW_BADGE"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "userDeniedNotificationConfig"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "UpdateDeniedNotification 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/notifications/read": {
+      "post": {
+        "operationId": "ReadNotification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "notificationId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "notificationId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ReadNotification 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/notifications/registration-token": {
+      "put": {
+        "operationId": "AddRegistrationToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientToken": {
+                    "type": "string"
+                  },
+                  "registrationToken": {
+                    "type": "string"
+                  },
+                  "userAgent": {
+                    "type": "string"
+                  },
+                  "deviceType": {
+                    "type": "string"
+                  },
+                  "deviceId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "clientToken",
+                  "registrationToken"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "AddRegistrationToken 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/profiles": {
+      "get": {
+        "operationId": "GetProfile",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetProfile 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "profile": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "profileImageUrl": {
+                          "type": "string"
+                        },
+                        "intros": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "introPropertyId": {
+                              "type": "string"
+                            },
+                            "isPublic": {
+                              "type": "boolean"
+                            },
+                            "content": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "profile"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/profiles/config": {
+      "get": {
+        "operationId": "GetProfileConfig",
+        "responses": {
+          "200": {
+            "description": "GetProfileConfig 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "introProperty": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "order": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "icon": {
+                          "type": "string"
+                        },
+                        "editable": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "teams": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "parentTeamId": {
+                          "type": "string"
+                        },
+                        "managers": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "firstName": {
+                              "type": "string"
+                            },
+                            "lastName": {
+                              "type": "string"
+                            },
+                            "fullName": {
+                              "type": "string"
+                            },
+                            "nickName": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "profileImageUrl": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "members": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "firstName": {
+                              "type": "string"
+                            },
+                            "lastName": {
+                              "type": "string"
+                            },
+                            "fullName": {
+                              "type": "string"
+                            },
+                            "nickName": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "profileImageUrl": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "allUserMiniProfiles": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        },
+                        "nickName": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "profileImageUrl": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/profiles/intro": {
+      "post": {
+        "operationId": "UpdateProfileIntro",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "introPropertyId": {
+                    "type": "string"
+                  },
+                  "isPublic": {
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "content",
+                  "introPropertyId",
+                  "isPublic"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "UpdateProfileIntro 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/profiles/profile-image": {
+      "post": {
+        "operationId": "UpdateProfileImage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "base64Image": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "base64Image"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "UpdateProfileImage 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "profileImageUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/stores": {
+      "get": {
+        "operationId": "GetStoreConfig",
+        "responses": {
+          "200": {
+            "description": "GetStoreConfig 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "requiredExchangeableCurrency": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "exchangedItemList": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "userId": {
+                          "type": "string"
+                        },
+                        "storeItemId": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/api/stores/user-exchange-item": {
+      "put": {
+        "operationId": "ExchangeStoreItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientToken": {
+                    "type": "string"
+                  },
+                  "storeItemId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "clientToken",
+                  "storeItemId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ExchangeStoreItem 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/auth/inspect": {
+      "get": {
+        "operationId": "InspectApiKey",
+        "responses": {
+          "200": {
+            "description": "InspectApiKey 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "expireTime": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        },
+                        "nickName": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "staffId": {
+                          "type": "string"
+                        },
+                        "dateOfBirth": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "joinDate": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "isActive": {
+                          "type": "boolean"
+                        },
+                        "lastLogin": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "expireTime",
+                    "user"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    },
+    "/auth/login/google": {
+      "post": {
+        "operationId": "LoginWithGoogle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "LoginWithGoogle 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKey": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "apiKey"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        },
+        "security": []
+      }
+    },
+    "/auth/login/mock": {
+      "post": {
+        "operationId": "MockLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "secret": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "secret"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "MockLogin 200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKey": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "apiKey"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        },
+        "security": []
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "Logout",
+        "responses": {
+          "200": {
+            "description": "Logout 200 response"
+          },
+          "400": {
+            "description": "ValidationException 400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                      "type": "object",
+                      "description": "Describes one specific validation failure for an input member.",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "A detailed description of the validation failure."
+                        }
+                      },
+                      "required": [
+                        "message",
+                        "path"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "InvalidAuthException 401 response"
+          },
+          "422": {
+            "description": "UserNotFoundError 422 response"
+          },
+          "429": {
+            "description": "TooManyRequestError 429 response"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddRegistrationTokenRequestContent": {
+        "type": "object",
+        "properties": {
+          "clientToken": {
+            "type": "string"
+          },
+          "registrationToken": {
+            "type": "string"
+          },
+          "userAgent": {
+            "type": "string"
+          },
+          "deviceType": {
+            "type": "string"
+          },
+          "deviceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientToken",
+          "registrationToken"
+        ]
+      },
+      "AudienceMode": {
+        "type": "string",
+        "enum": [
+          "PUBLIC",
+          "PRIVATE"
+        ]
+      },
+      "Badge": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "reactionMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ContentCategory": {
+        "type": "string",
+        "enum": [
+          "FEED",
+          "KUDOS",
+          "BADGE",
+          "CURRENCY"
+        ]
+      },
+      "ContentSource": {
+        "type": "object",
+        "properties": {
+          "contentId": {
+            "type": "string"
+          },
+          "contentCategory": {
+            "type": "string",
+            "enum": [
+              "FEED",
+              "KUDOS",
+              "BADGE",
+              "CURRENCY"
+            ]
+          },
+          "createdUserId": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateCommentReactionRequestContent": {
+        "type": "object",
+        "properties": {
+          "clientToken": {
+            "type": "string"
+          },
+          "commentId": {
+            "type": "string"
+          },
+          "reactionType": {
+            "type": "string",
+            "enum": [
+              "LIKE"
+            ]
+          }
+        },
+        "required": [
+          "clientToken",
+          "commentId",
+          "reactionType"
+        ]
+      },
+      "CreatePostReactionRequestContent": {
+        "type": "object",
+        "properties": {
+          "clientToken": {
+            "type": "string"
+          },
+          "postId": {
+            "type": "string"
+          },
+          "reactionType": {
+            "type": "string",
+            "enum": [
+              "LIKE"
+            ]
+          }
+        },
+        "required": [
+          "clientToken",
+          "postId",
+          "reactionType"
+        ]
+      },
+      "CreatePostRequestContent": {
+        "type": "object",
+        "properties": {
+          "clientToken": {
+            "type": "string"
+          },
+          "isAdminPost": {
+            "type": "boolean"
+          },
+          "content": {
+            "type": "string"
+          },
+          "base64Images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "base64Images",
+          "clientToken",
+          "content",
+          "isAdminPost"
+        ]
+      },
+      "CreatePostResponseContent": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "isAdminPost": {
+                "type": "boolean"
+              },
+              "postByUserId": {
+                "type": "string"
+              },
+              "contentSource": {
+                "type": "object",
+                "properties": {
+                  "contentId": {
+                    "type": "string"
+                  },
+                  "contentCategory": {
+                    "type": "string",
+                    "enum": [
+                      "FEED",
+                      "KUDOS",
+                      "BADGE",
+                      "CURRENCY"
+                    ]
+                  },
+                  "createdUserId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "type": "string"
+              },
+              "imageUrls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reactionMap": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "comments": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "postId": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "reactionMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "canComment": {
+                "type": "boolean"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "ExchangeStoreItemRequestContent": {
+        "type": "object",
+        "properties": {
+          "clientToken": {
+            "type": "string"
+          },
+          "storeItemId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "clientToken",
+          "storeItemId"
+        ]
+      },
+      "GetFeedResponseContent": {
+        "type": "object",
+        "properties": {
+          "posts": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "isAdminPost": {
+                "type": "boolean"
+              },
+              "postByUserId": {
+                "type": "string"
+              },
+              "contentSource": {
+                "type": "object",
+                "properties": {
+                  "contentId": {
+                    "type": "string"
+                  },
+                  "contentCategory": {
+                    "type": "string",
+                    "enum": [
+                      "FEED",
+                      "KUDOS",
+                      "BADGE",
+                      "CURRENCY"
+                    ]
+                  },
+                  "createdUserId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "type": "string"
+              },
+              "imageUrls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reactionMap": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "comments": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "postId": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "reactionMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "canComment": {
+                "type": "boolean"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "GetMyBadgesResponseContent": {
+        "type": "object",
+        "properties": {
+          "badges": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "badge": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string"
+                  },
+                  "createdBy": {
+                    "type": "string"
+                  }
+                }
+              },
+              "accquiredOn": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "pinnedBadgeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "badges",
+          "pinnedBadgeIds"
+        ]
+      },
+      "GetMyCurrencyResponseContent": {
+        "type": "object",
+        "properties": {
+          "userCurrency": {
+            "type": "object",
+            "properties": {
+              "userSendableCurrency": {
+                "type": "object",
+                "properties": {
+                  "sendableCurrency": {
+                    "type": "number"
+                  },
+                  "expireTime": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "userExchangableCurrency": {
+                "type": "object",
+                "properties": {
+                  "exchangeableCurrency": {
+                    "type": "number"
+                  },
+                  "expiringAmount": {
+                    "type": "number"
+                  },
+                  "expiringOn": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetMyKudosResponseContent": {
+        "type": "object",
+        "properties": {
+          "kudos": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fromUserId": {
+                "type": "string"
+              },
+              "toUserId": {
+                "type": "string"
+              },
+              "audienceMode": {
+                "type": "string",
+                "enum": [
+                  "PUBLIC",
+                  "PRIVATE"
+                ]
+              },
+              "sendableCurrency": {
+                "type": "number"
+              },
+              "hashTags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "message": {
+                "type": "string"
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "pinnedKudosIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "kudos",
+          "pinnedKudosIds"
+        ]
+      },
+      "GetNotificationsConfigResponseContent": {
+        "type": "object",
+        "properties": {
+          "notificationContentTypes": {
+            "type": "string",
+            "enum": [
+              "NEW_FEED_POST",
+              "COMMENT_TO_YOUR_POST",
+              "REACT_TO_YOUR_POST",
+              "REACT_TO_YOUR_COMMENT",
+              "SEND_KUDOS_TO_YOU",
+              "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "RECEIVE_NEW_BADGE"
+            ]
+          },
+          "userDeniedNotificationConfig": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "notificationChannel": {
+                "type": "string",
+                "enum": [
+                  "SEA_TALK",
+                  "PUSH"
+                ]
+              },
+              "isDenyAll": {
+                "type": "boolean"
+              },
+              "deniedNotificationContentList": {
+                "type": "string",
+                "enum": [
+                  "NEW_FEED_POST",
+                  "COMMENT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_COMMENT",
+                  "SEND_KUDOS_TO_YOU",
+                  "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "RECEIVE_NEW_BADGE"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "GetNotificationsResponseContent": {
+        "type": "object",
+        "properties": {
+          "notifications": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "isRead": {
+                "type": "boolean"
+              },
+              "actorUserId": {
+                "type": "string"
+              },
+              "receiverUserId": {
+                "type": "string"
+              },
+              "contentSource": {
+                "type": "object",
+                "properties": {
+                  "contentId": {
+                    "type": "string"
+                  },
+                  "contentCategory": {
+                    "type": "string",
+                    "enum": [
+                      "FEED",
+                      "KUDOS",
+                      "BADGE",
+                      "CURRENCY"
+                    ]
+                  },
+                  "createdUserId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "notificationContentType": {
+                "type": "string",
+                "enum": [
+                  "NEW_FEED_POST",
+                  "COMMENT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_COMMENT",
+                  "SEND_KUDOS_TO_YOU",
+                  "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "RECEIVE_NEW_BADGE"
+                ]
+              },
+              "data": {}
+            }
+          }
+        }
+      },
+      "GetProfileConfigResponseContent": {
+        "type": "object",
+        "properties": {
+          "introProperty": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "order": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string"
+              },
+              "editable": {
+                "type": "boolean"
+              }
+            }
+          },
+          "teams": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "parentTeamId": {
+                "type": "string"
+              },
+              "managers": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "nickName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "profileImageUrl": {
+                    "type": "string"
+                  }
+                }
+              },
+              "members": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "nickName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "profileImageUrl": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "allUserMiniProfiles": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "nickName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "profileImageUrl": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "GetProfileResponseContent": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "profileImageUrl": {
+                "type": "string"
+              },
+              "intros": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "introPropertyId": {
+                    "type": "string"
+                  },
+                  "isPublic": {
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "profile"
+        ]
+      },
+      "GetStoreConfigResponseContent": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "requiredExchangeableCurrency": {
+                "type": "number"
+              }
+            }
+          },
+          "exchangedItemList": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "storeItemId": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "GetUserBadgesResponseContent": {
+        "type": "object",
+        "properties": {
+          "badges": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "badge": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string"
+                  },
+                  "createdBy": {
+                    "type": "string"
+                  }
+                }
+              },
+              "accquiredOn": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "GetUserKudosResponseContent": {
+        "type": "object",
+        "properties": {
+          "kudos": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fromUserId": {
+                "type": "string"
+              },
+              "toUserId": {
+                "type": "string"
+              },
+              "audienceMode": {
+                "type": "string",
+                "enum": [
+                  "PUBLIC",
+                  "PRIVATE"
+                ]
+              },
+              "sendableCurrency": {
+                "type": "number"
+              },
+              "hashTags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "message": {
+                "type": "string"
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "InspectApiKeyResponseContent": {
+        "type": "object",
+        "properties": {
+          "expireTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "nickName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "staffId": {
+                "type": "string"
+              },
+              "dateOfBirth": {
+                "type": "number",
+                "format": "double"
+              },
+              "joinDate": {
+                "type": "number",
+                "format": "double"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "lastLogin": {
+                "type": "number",
+                "format": "double"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "required": [
+          "expireTime",
+          "user"
+        ]
+      },
+      "IntroDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "introPropertyId": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "IntroProperty": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "editable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Kudos": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fromUserId": {
+            "type": "string"
+          },
+          "toUserId": {
+            "type": "string"
+          },
+          "audienceMode": {
+            "type": "string",
+            "enum": [
+              "PUBLIC",
+              "PRIVATE"
+            ]
+          },
+          "sendableCurrency": {
+            "type": "number"
+          },
+          "hashTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LoginWithGoogleRequestContent": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "LoginWithGoogleResponseContent": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "apiKey"
+        ]
+      },
+      "MiniProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "profileImageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "MockLoginRequestContent": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "secret"
+        ]
+      },
+      "MockLoginResponseContent": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "apiKey"
+        ]
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "actorUserId": {
+            "type": "string"
+          },
+          "receiverUserId": {
+            "type": "string"
+          },
+          "contentSource": {
+            "type": "object",
+            "properties": {
+              "contentId": {
+                "type": "string"
+              },
+              "contentCategory": {
+                "type": "string",
+                "enum": [
+                  "FEED",
+                  "KUDOS",
+                  "BADGE",
+                  "CURRENCY"
+                ]
+              },
+              "createdUserId": {
+                "type": "string"
+              }
+            }
+          },
+          "notificationContentType": {
+            "type": "string",
+            "enum": [
+              "NEW_FEED_POST",
+              "COMMENT_TO_YOUR_POST",
+              "REACT_TO_YOUR_POST",
+              "REACT_TO_YOUR_COMMENT",
+              "SEND_KUDOS_TO_YOU",
+              "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "RECEIVE_NEW_BADGE"
+            ]
+          },
+          "data": {}
+        }
+      },
+      "NotificationChannel": {
+        "type": "string",
+        "enum": [
+          "SEA_TALK",
+          "PUSH"
+        ]
+      },
+      "NotificationContentType": {
+        "type": "string",
+        "enum": [
+          "NEW_FEED_POST",
+          "COMMENT_TO_YOUR_POST",
+          "REACT_TO_YOUR_POST",
+          "REACT_TO_YOUR_COMMENT",
+          "SEND_KUDOS_TO_YOU",
+          "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+          "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+          "RECEIVE_NEW_BADGE"
+        ]
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "isAdminPost": {
+            "type": "boolean"
+          },
+          "postByUserId": {
+            "type": "string"
+          },
+          "contentSource": {
+            "type": "object",
+            "properties": {
+              "contentId": {
+                "type": "string"
+              },
+              "contentCategory": {
+                "type": "string",
+                "enum": [
+                  "FEED",
+                  "KUDOS",
+                  "BADGE",
+                  "CURRENCY"
+                ]
+              },
+              "createdUserId": {
+                "type": "string"
+              }
+            }
+          },
+          "content": {
+            "type": "string"
+          },
+          "imageUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reactionMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "comments": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "postId": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "reactionMap": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "canComment": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "ReactionMap": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "ReactionType": {
+        "type": "string",
+        "enum": [
+          "LIKE"
+        ]
+      },
+      "ReadNotificationRequestContent": {
+        "type": "object",
+        "properties": {
+          "notificationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "notificationId"
+        ]
+      },
+      "SaveMyPinBadgesRequestContent": {
+        "type": "object",
+        "properties": {
+          "bagdesIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "bagdesIds"
+        ]
+      },
+      "SaveMyPinBadgesResponseContent": {
+        "type": "object",
+        "properties": {
+          "pinnedBadgeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "pinnedBadgeIds"
+        ]
+      },
+      "SendKudosRequestContent": {
+        "type": "object",
+        "properties": {
+          "clientToken": {
+            "type": "string"
+          },
+          "toUserId": {
+            "type": "string"
+          },
+          "audienceMode": {
+            "type": "string",
+            "enum": [
+              "PUBLIC",
+              "PRIVATE"
+            ]
+          },
+          "sendableCurrency": {
+            "type": "number"
+          },
+          "hashTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "type": "string"
+          },
+          "base64Image": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "audienceMode",
+          "clientToken",
+          "hashTags",
+          "message",
+          "sendableCurrency",
+          "toUserId"
+        ]
+      },
+      "SendKudosResponseContent": {
+        "type": "object",
+        "properties": {
+          "kudos": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fromUserId": {
+                "type": "string"
+              },
+              "toUserId": {
+                "type": "string"
+              },
+              "audienceMode": {
+                "type": "string",
+                "enum": [
+                  "PUBLIC",
+                  "PRIVATE"
+                ]
+              },
+              "sendableCurrency": {
+                "type": "number"
+              },
+              "hashTags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "message": {
+                "type": "string"
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "required": [
+          "kudos"
+        ]
+      },
+      "StoreItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "requiredExchangeableCurrency": {
+            "type": "number"
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parentTeamId": {
+            "type": "string"
+          },
+          "managers": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "nickName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "profileImageUrl": {
+                "type": "string"
+              }
+            }
+          },
+          "members": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "nickName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "profileImageUrl": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ToogleMyPinKudosRequestContent": {
+        "type": "object",
+        "properties": {
+          "kudosId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kudosId"
+        ]
+      },
+      "UpdateDeniedNotificationRequestContent": {
+        "type": "object",
+        "properties": {
+          "userDeniedNotificationConfig": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "notificationChannel": {
+                "type": "string",
+                "enum": [
+                  "SEA_TALK",
+                  "PUSH"
+                ]
+              },
+              "isDenyAll": {
+                "type": "boolean"
+              },
+              "deniedNotificationContentList": {
+                "type": "string",
+                "enum": [
+                  "NEW_FEED_POST",
+                  "COMMENT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_COMMENT",
+                  "SEND_KUDOS_TO_YOU",
+                  "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "RECEIVE_NEW_BADGE"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "userDeniedNotificationConfig"
+        ]
+      },
+      "UpdateProfileImageRequestContent": {
+        "type": "object",
+        "properties": {
+          "base64Image": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "base64Image"
+        ]
+      },
+      "UpdateProfileImageResponseContent": {
+        "type": "object",
+        "properties": {
+          "profileImageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateProfileIntroRequestContent": {
+        "type": "object",
+        "properties": {
+          "introPropertyId": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "introPropertyId",
+          "isPublic"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "staffId": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "number",
+            "format": "double"
+          },
+          "joinDate": {
+            "type": "number",
+            "format": "double"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "lastLogin": {
+            "type": "number",
+            "format": "double"
+          },
+          "createdAt": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "UserBadge": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "badge": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "createdBy": {
+                "type": "string"
+              }
+            }
+          },
+          "accquiredOn": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "UserCurrency": {
+        "type": "object",
+        "properties": {
+          "userSendableCurrency": {
+            "type": "object",
+            "properties": {
+              "sendableCurrency": {
+                "type": "number"
+              },
+              "expireTime": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "userExchangableCurrency": {
+            "type": "object",
+            "properties": {
+              "exchangeableCurrency": {
+                "type": "number"
+              },
+              "expiringAmount": {
+                "type": "number"
+              },
+              "expiringOn": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "UserDeniedNotificationConfig": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "notificationChannel": {
+            "type": "string",
+            "enum": [
+              "SEA_TALK",
+              "PUSH"
+            ]
+          },
+          "isDenyAll": {
+            "type": "boolean"
+          },
+          "deniedNotificationContentList": {
+            "type": "string",
+            "enum": [
+              "NEW_FEED_POST",
+              "COMMENT_TO_YOUR_POST",
+              "REACT_TO_YOUR_POST",
+              "REACT_TO_YOUR_COMMENT",
+              "SEND_KUDOS_TO_YOU",
+              "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "RECEIVE_NEW_BADGE"
+            ]
+          }
+        }
+      },
+      "UserExchangeItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "storeItemId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "UserExchangeableCurrency": {
+        "type": "object",
+        "properties": {
+          "exchangeableCurrency": {
+            "type": "number"
+          },
+          "expiringAmount": {
+            "type": "number"
+          },
+          "expiringOn": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "profileImageUrl": {
+            "type": "string"
+          },
+          "intros": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "introPropertyId": {
+                "type": "string"
+              },
+              "isPublic": {
+                "type": "boolean"
+              },
+              "content": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "UserSendableCurrency": {
+        "type": "object",
+        "properties": {
+          "sendableCurrency": {
+            "type": "number"
+          },
+          "expireTime": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "ValidationExceptionField": {
+        "type": "object",
+        "description": "Describes one specific validation failure for an input member.",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+          },
+          "message": {
+            "type": "string",
+            "description": "A detailed description of the validation failure."
+          }
+        },
+        "required": [
+          "message",
+          "path"
+        ]
+      },
+      "ValidationExceptionResponseContent": {
+        "type": "object",
+        "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A summary of the validation failure."
+          },
+          "fieldList": {
+            "type": "object",
+            "description": "Describes one specific validation failure for an input member.",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+              },
+              "message": {
+                "type": "string",
+                "description": "A detailed description of the validation failure."
+              }
+            },
+            "required": [
+              "message",
+              "path"
+            ]
+          }
+        },
+        "required": [
+          "message"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "smithy.api.httpApiKeyAuth": {
+        "type": "apiKey",
+        "description": "API key authentication via the 'X-Api-Key' header",
+        "name": "X-Api-Key",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "smithy.api.httpApiKeyAuth": []
+    }
+  ]
+}

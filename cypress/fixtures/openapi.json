@@ -1,0 +1,2233 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "BackendService",
+        "version": "2023-08-11"
+    },
+    "paths": {
+        "/api/badges": {
+            "get": {
+                "operationId": "GetUserBadges",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetUserBadges 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetUserBadgesResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/badges/me": {
+            "get": {
+                "operationId": "GetMyBadges",
+                "responses": {
+                    "200": {
+                        "description": "GetMyBadges 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetMyBadgesResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/badges/me/pin": {
+            "post": {
+                "operationId": "SaveMyPinBadges",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SaveMyPinBadgesRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "SaveMyPinBadges 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SaveMyPinBadgesResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/currencies/me": {
+            "get": {
+                "operationId": "GetMyCurrency",
+                "responses": {
+                    "200": {
+                        "description": "GetMyCurrency 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetMyCurrencyResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/feeds": {
+            "get": {
+                "operationId": "GetFeed",
+                "parameters": [
+                    {
+                        "name": "contentCategory",
+                        "in": "query",
+                        "schema": {
+                            "$ref": "#/components/schemas/ContentCategory"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetFeed 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetFeedResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/feeds/comment/reaction": {
+            "delete": {
+                "operationId": "DeleteCommentReaction",
+                "parameters": [
+                    {
+                        "name": "clientToken",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "commentId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "reactionType",
+                        "in": "query",
+                        "schema": {
+                            "$ref": "#/components/schemas/ReactionType"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DeleteCommentReaction 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CreateCommentReaction",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCommentReactionRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "CreateCommentReaction 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/feeds/post": {
+            "put": {
+                "operationId": "CreatePost",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePostRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "CreatePost 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreatePostResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/feeds/post/reaction": {
+            "delete": {
+                "operationId": "DeletePostReaction",
+                "parameters": [
+                    {
+                        "name": "clientToken",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "postId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "reactionType",
+                        "in": "query",
+                        "schema": {
+                            "$ref": "#/components/schemas/ReactionType"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DeletePostReaction 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CreatePostReaction",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePostReactionRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "CreatePostReaction 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/kudos": {
+            "get": {
+                "operationId": "GetUserKudos",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetUserKudos 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetUserKudosResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "SendKudos",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendKudosRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "SendKudos 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SendKudosResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/kudos/me": {
+            "get": {
+                "operationId": "GetMyKudos",
+                "responses": {
+                    "200": {
+                        "description": "GetMyKudos 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetMyKudosResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/kudos/me/toogle-pin": {
+            "post": {
+                "operationId": "ToogleMyPinKudos",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ToogleMyPinKudosRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "ToogleMyPinKudos 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/notifications": {
+            "get": {
+                "operationId": "GetNotifications",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetNotifications 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNotificationsResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/notifications/config": {
+            "get": {
+                "operationId": "GetNotificationsConfig",
+                "responses": {
+                    "200": {
+                        "description": "GetNotificationsConfig 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNotificationsConfigResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/notifications/denied-notification": {
+            "post": {
+                "operationId": "UpdateDeniedNotification",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDeniedNotificationRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "UpdateDeniedNotification 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/notifications/read": {
+            "post": {
+                "operationId": "ReadNotification",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReadNotificationRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "ReadNotification 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/notifications/registration-token": {
+            "put": {
+                "operationId": "AddRegistrationToken",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddRegistrationTokenRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "AddRegistrationToken 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/profiles": {
+            "get": {
+                "operationId": "GetProfile",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetProfile 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetProfileResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/profiles/config": {
+            "get": {
+                "operationId": "GetProfileConfig",
+                "responses": {
+                    "200": {
+                        "description": "GetProfileConfig 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetProfileConfigResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/profiles/intro": {
+            "post": {
+                "operationId": "UpdateProfileIntro",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProfileIntroRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "UpdateProfileIntro 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/profiles/profile-image": {
+            "post": {
+                "operationId": "UpdateProfileImage",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProfileImageRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "UpdateProfileImage 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateProfileImageResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/stores": {
+            "get": {
+                "operationId": "GetStoreConfig",
+                "responses": {
+                    "200": {
+                        "description": "GetStoreConfig 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetStoreConfigResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/stores/user-exchange-item": {
+            "put": {
+                "operationId": "ExchangeStoreItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExchangeStoreItemRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "ExchangeStoreItem 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/auth/inspect": {
+            "get": {
+                "operationId": "InspectApiKey",
+                "responses": {
+                    "200": {
+                        "description": "InspectApiKey 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InspectApiKeyResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/auth/login/google": {
+            "post": {
+                "operationId": "LoginWithGoogle",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginWithGoogleRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "LoginWithGoogle 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginWithGoogleResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/auth/login/mock": {
+            "post": {
+                "operationId": "MockLogin",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MockLoginRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "MockLogin 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MockLoginResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "operationId": "Logout",
+                "responses": {
+                    "200": {
+                        "description": "Logout 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AddRegistrationTokenRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "registrationToken": {
+                        "type": "string"
+                    },
+                    "userAgent": {
+                        "type": "string"
+                    },
+                    "deviceType": {
+                        "type": "string"
+                    },
+                    "deviceId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "clientToken",
+                    "registrationToken"
+                ]
+            },
+            "AudienceMode": {
+                "type": "string",
+                "enum": [
+                    "PUBLIC",
+                    "PRIVATE"
+                ]
+            },
+            "Badge": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "imageUrl": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Comment": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "postId": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "reactionMap": {
+                        "$ref": "#/components/schemas/ReactionMap"
+                    }
+                }
+            },
+            "ContentCategory": {
+                "type": "string",
+                "enum": [
+                    "FEED",
+                    "KUDOS",
+                    "BADGE",
+                    "CURRENCY"
+                ]
+            },
+            "ContentSource": {
+                "type": "object",
+                "properties": {
+                    "contentId": {
+                        "type": "string"
+                    },
+                    "contentCategory": {
+                        "$ref": "#/components/schemas/ContentCategory"
+                    },
+                    "createdUserId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateCommentReactionRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "commentId": {
+                        "type": "string"
+                    },
+                    "reactionType": {
+                        "$ref": "#/components/schemas/ReactionType"
+                    }
+                },
+                "required": [
+                    "clientToken",
+                    "commentId",
+                    "reactionType"
+                ]
+            },
+            "CreatePostReactionRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "postId": {
+                        "type": "string"
+                    },
+                    "reactionType": {
+                        "$ref": "#/components/schemas/ReactionType"
+                    }
+                },
+                "required": [
+                    "clientToken",
+                    "postId",
+                    "reactionType"
+                ]
+            },
+            "CreatePostRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "isAdminPost": {
+                        "type": "boolean"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "base64Images": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "base64Images",
+                    "clientToken",
+                    "content",
+                    "isAdminPost"
+                ]
+            },
+            "CreatePostResponseContent": {
+                "type": "object",
+                "properties": {
+                    "post": {
+                        "$ref": "#/components/schemas/Post"
+                    }
+                }
+            },
+            "ExchangeStoreItemRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "storeItemId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "clientToken",
+                    "storeItemId"
+                ]
+            },
+            "GetFeedResponseContent": {
+                "type": "object",
+                "properties": {
+                    "posts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Post"
+                        }
+                    }
+                }
+            },
+            "GetMyBadgesResponseContent": {
+                "type": "object",
+                "properties": {
+                    "badges": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserBadge"
+                        }
+                    },
+                    "pinnedBadgeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "badges",
+                    "pinnedBadgeIds"
+                ]
+            },
+            "GetMyCurrencyResponseContent": {
+                "type": "object",
+                "properties": {
+                    "userCurrency": {
+                        "$ref": "#/components/schemas/UserCurrency"
+                    }
+                }
+            },
+            "GetMyKudosResponseContent": {
+                "type": "object",
+                "properties": {
+                    "kudos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Kudos"
+                        }
+                    },
+                    "pinnedKudosIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "kudos",
+                    "pinnedKudosIds"
+                ]
+            },
+            "GetNotificationsConfigResponseContent": {
+                "type": "object",
+                "properties": {
+                    "notificationContentTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NotificationContentType"
+                        }
+                    },
+                    "userDeniedNotificationConfig": {
+                        "$ref": "#/components/schemas/UserDeniedNotificationConfig"
+                    }
+                }
+            },
+            "GetNotificationsResponseContent": {
+                "type": "object",
+                "properties": {
+                    "notifications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Notification"
+                        }
+                    }
+                }
+            },
+            "GetProfileConfigResponseContent": {
+                "type": "object",
+                "properties": {
+                    "introProperty": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IntroProperty"
+                        }
+                    },
+                    "teams": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Team"
+                        }
+                    },
+                    "allUserMiniProfiles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MiniProfile"
+                        }
+                    }
+                }
+            },
+            "GetProfileResponseContent": {
+                "type": "object",
+                "properties": {
+                    "profile": {
+                        "$ref": "#/components/schemas/UserProfile"
+                    }
+                },
+                "required": [
+                    "profile"
+                ]
+            },
+            "GetStoreConfigResponseContent": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StoreItem"
+                        }
+                    },
+                    "exchangedItemList": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserExchangeItem"
+                        }
+                    }
+                }
+            },
+            "GetUserBadgesResponseContent": {
+                "type": "object",
+                "properties": {
+                    "badges": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserBadge"
+                        }
+                    }
+                }
+            },
+            "GetUserKudosResponseContent": {
+                "type": "object",
+                "properties": {
+                    "kudos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Kudos"
+                        }
+                    }
+                }
+            },
+            "InspectApiKeyResponseContent": {
+                "type": "object",
+                "properties": {
+                    "expireTime": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                },
+                "required": [
+                    "expireTime",
+                    "user"
+                ]
+            },
+            "IntroDetail": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "introPropertyId": {
+                        "type": "string"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                }
+            },
+            "IntroProperty": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "order": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "icon": {
+                        "type": "string"
+                    },
+                    "editable": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Kudos": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "fromUserId": {
+                        "type": "string"
+                    },
+                    "toUserId": {
+                        "type": "string"
+                    },
+                    "audienceMode": {
+                        "$ref": "#/components/schemas/AudienceMode"
+                    },
+                    "sendableCurrency": {
+                        "type": "number"
+                    },
+                    "hashTags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "imageUrl": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "LoginWithGoogleRequestContent": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code"
+                ]
+            },
+            "LoginWithGoogleResponseContent": {
+                "type": "object",
+                "properties": {
+                    "apiKey": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "apiKey"
+                ]
+            },
+            "MiniProfile": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "nickName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "profileImageUrl": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MockLoginRequestContent": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "email",
+                    "secret"
+                ]
+            },
+            "MockLoginResponseContent": {
+                "type": "object",
+                "properties": {
+                    "apiKey": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "apiKey"
+                ]
+            },
+            "Notification": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "isRead": {
+                        "type": "boolean"
+                    },
+                    "actorUserId": {
+                        "type": "string"
+                    },
+                    "receiverUserId": {
+                        "type": "string"
+                    },
+                    "contentSource": {
+                        "$ref": "#/components/schemas/ContentSource"
+                    },
+                    "notificationContentType": {
+                        "$ref": "#/components/schemas/NotificationContentType"
+                    },
+                    "data": {}
+                }
+            },
+            "NotificationChannel": {
+                "type": "string",
+                "enum": [
+                    "SEA_TALK",
+                    "PUSH"
+                ]
+            },
+            "NotificationContentType": {
+                "type": "string",
+                "enum": [
+                    "NEW_FEED_POST",
+                    "COMMENT_TO_YOUR_POST",
+                    "REACT_TO_YOUR_POST",
+                    "REACT_TO_YOUR_COMMENT",
+                    "SEND_KUDOS_TO_YOU",
+                    "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                    "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                    "RECEIVE_NEW_BADGE"
+                ]
+            },
+            "Post": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "isAdminPost": {
+                        "type": "boolean"
+                    },
+                    "postByUserId": {
+                        "type": "string"
+                    },
+                    "contentSource": {
+                        "$ref": "#/components/schemas/ContentSource"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "imageUrls": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "reactionMap": {
+                        "$ref": "#/components/schemas/ReactionMap"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Comment"
+                        }
+                    },
+                    "canComment": {
+                        "type": "boolean"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "ReactionMap": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ReactionType": {
+                "type": "string",
+                "enum": [
+                    "LIKE"
+                ]
+            },
+            "ReadNotificationRequestContent": {
+                "type": "object",
+                "properties": {
+                    "notificationId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "notificationId"
+                ]
+            },
+            "SaveMyPinBadgesRequestContent": {
+                "type": "object",
+                "properties": {
+                    "bagdesIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "bagdesIds"
+                ]
+            },
+            "SaveMyPinBadgesResponseContent": {
+                "type": "object",
+                "properties": {
+                    "pinnedBadgeIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "pinnedBadgeIds"
+                ]
+            },
+            "SendKudosRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "toUserId": {
+                        "type": "string"
+                    },
+                    "audienceMode": {
+                        "$ref": "#/components/schemas/AudienceMode"
+                    },
+                    "sendableCurrency": {
+                        "type": "number"
+                    },
+                    "hashTags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "base64Image": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "audienceMode",
+                    "clientToken",
+                    "hashTags",
+                    "message",
+                    "sendableCurrency",
+                    "toUserId"
+                ]
+            },
+            "SendKudosResponseContent": {
+                "type": "object",
+                "properties": {
+                    "kudos": {
+                        "$ref": "#/components/schemas/Kudos"
+                    }
+                },
+                "required": [
+                    "kudos"
+                ]
+            },
+            "StoreItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "requiredExchangeableCurrency": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Team": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "parentTeamId": {
+                        "type": "string"
+                    },
+                    "managers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MiniProfile"
+                        }
+                    },
+                    "members": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MiniProfile"
+                        }
+                    }
+                }
+            },
+            "ToogleMyPinKudosRequestContent": {
+                "type": "object",
+                "properties": {
+                    "kudosId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "kudosId"
+                ]
+            },
+            "UpdateDeniedNotificationRequestContent": {
+                "type": "object",
+                "properties": {
+                    "userDeniedNotificationConfig": {
+                        "$ref": "#/components/schemas/UserDeniedNotificationConfig"
+                    }
+                },
+                "required": [
+                    "userDeniedNotificationConfig"
+                ]
+            },
+            "UpdateProfileImageRequestContent": {
+                "type": "object",
+                "properties": {
+                    "base64Image": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "base64Image"
+                ]
+            },
+            "UpdateProfileImageResponseContent": {
+                "type": "object",
+                "properties": {
+                    "profileImageUrl": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateProfileIntroRequestContent": {
+                "type": "object",
+                "properties": {
+                    "introPropertyId": {
+                        "type": "string"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "content",
+                    "introPropertyId",
+                    "isPublic"
+                ]
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "nickName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "staffId": {
+                        "type": "string"
+                    },
+                    "dateOfBirth": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "joinDate": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    },
+                    "lastLogin": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "UserBadge": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "badge": {
+                        "$ref": "#/components/schemas/Badge"
+                    },
+                    "accquiredOn": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "UserCurrency": {
+                "type": "object",
+                "properties": {
+                    "userSendableCurrency": {
+                        "$ref": "#/components/schemas/UserSendableCurrency"
+                    },
+                    "userExchangableCurrency": {
+                        "$ref": "#/components/schemas/UserExchangeableCurrency"
+                    }
+                }
+            },
+            "UserDeniedNotificationConfig": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "notificationChannel": {
+                        "$ref": "#/components/schemas/NotificationChannel"
+                    },
+                    "isDenyAll": {
+                        "type": "boolean"
+                    },
+                    "deniedNotificationContentList": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NotificationContentType"
+                        }
+                    }
+                }
+            },
+            "UserExchangeItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "storeItemId": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "UserExchangeableCurrency": {
+                "type": "object",
+                "properties": {
+                    "exchangeableCurrency": {
+                        "type": "number"
+                    },
+                    "expiringAmount": {
+                        "type": "number"
+                    },
+                    "expiringOn": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "UserProfile": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "profileImageUrl": {
+                        "type": "string"
+                    },
+                    "intros": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IntroDetail"
+                        }
+                    }
+                }
+            },
+            "UserSendableCurrency": {
+                "type": "object",
+                "properties": {
+                    "sendableCurrency": {
+                        "type": "number"
+                    },
+                    "expireTime": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "ValidationExceptionField": {
+                "type": "object",
+                "description": "Describes one specific validation failure for an input member.",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "A JSONPointer expression to the structure member whose value failed to satisfy the modeled constraints."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "A detailed description of the validation failure."
+                    }
+                },
+                "required": [
+                    "message",
+                    "path"
+                ]
+            },
+            "ValidationExceptionResponseContent": {
+                "type": "object",
+                "description": "A standard error for input validation failures.\nThis should be thrown by services when a member of the input structure\nfalls outside of the modeled or documented constraints.",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "A summary of the validation failure."
+                    },
+                    "fieldList": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationExceptionField"
+                        },
+                        "description": "A list of specific failures encountered while validating the input.\nA member can appear in this list more than once if it failed to satisfy multiple constraints."
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "smithy.api.httpApiKeyAuth": {
+                "type": "apiKey",
+                "description": "API key authentication via the 'X-Api-Key' header",
+                "name": "X-Api-Key",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "smithy.api.httpApiKeyAuth": []
+        }
+    ]
+}

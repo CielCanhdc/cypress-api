@@ -26,7 +26,6 @@
 
 import { Keywords } from "./constants"
 
-
 // GET - user infos api here
 Cypress.Commands.add('getUserInfos', () => {
     cy.fixture('user-get').then((data) => {
@@ -77,4 +76,20 @@ Cypress.Commands.overwrite('request', (originalFn, url, options) => {
 })
 
 
-
+// Validate response Json schema
+Cypress.Commands.add('validateSchema', (schema, response) => {
+    if (Cypress.env('schemaCheckRequired')) {
+        // if allow validate response schema
+        const validator = require('is-my-json-valid')
+        const validate = validator(schema)
+        const result = validate(response)
+    
+        cy.log('error: ', JSON.stringify(validate.errors))
+        cy.then(() => { 
+            // For Async print cy.log()
+            expect(result).to.be.true
+        })
+    } else {
+        console.log("no need validate this schema")
+    }
+})

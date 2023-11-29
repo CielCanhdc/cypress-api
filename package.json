@@ -18,8 +18,11 @@
     "cypress": "^13.5.1"
   },
   "dependencies": {
+    "@jc21/cypress-swagger-validation": "^0.2.5",
+    "chai-json-schema": "^1.5.1",
     "cypress-mochawesome-reporter": "^3.7.0",
     "cypress-plugin-api": "^2.11.1",
+    "is-my-json-valid": "^2.20.6",
     "mochawesome-merge": "^4.3.0"
   }
 }
