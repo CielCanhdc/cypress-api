@@ -1,0 +1,58 @@
+{
+  "path": "/api/badges/me",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "badges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "badge": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string"
+                  },
+                  "createdBy": {
+                    "type": "string"
+                  }
+                }
+              },
+              "accquiredOn": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "pinnedBadgeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "badges",
+        "pinnedBadgeIds"
+      ]
+    }
+  }
+}

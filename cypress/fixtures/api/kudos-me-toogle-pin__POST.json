@@ -1,0 +1,66 @@
+{
+  "path": "/api/kudos/me/toogle-pin",
+  "method": "POST",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "kudos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fromUserId": {
+                "type": "string"
+              },
+              "toUserId": {
+                "type": "string"
+              },
+              "audienceMode": {
+                "type": "string",
+                "enum": [
+                  "PUBLIC",
+                  "PRIVATE"
+                ]
+              },
+              "sendableCurrency": {
+                "type": "number"
+              },
+              "hashTags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "message": {
+                "type": "string"
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "pinnedKudosIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kudos",
+        "pinnedKudosIds"
+      ]
+    }
+  }
+}

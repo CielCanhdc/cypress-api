@@ -1,0 +1,46 @@
+{
+  "path": "/api/feeds/post",
+  "method": "DELETE",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "postId": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "reactionMap": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "createdAt": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "required": [
+        "comment"
+      ]
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "path": "/auth/inspect",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "expireTime": {
+          "type": "number",
+          "format": "double"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "fullName": {
+              "type": "string"
+            },
+            "nickName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "staffId": {
+              "type": "string"
+            },
+            "dateOfBirth": {
+              "type": "number",
+              "format": "double"
+            },
+            "joinDate": {
+              "type": "number",
+              "format": "double"
+            },
+            "isActive": {
+              "type": "boolean"
+            },
+            "lastLogin": {
+              "type": "number",
+              "format": "double"
+            },
+            "isAdmin": {
+              "type": "boolean"
+            },
+            "createdAt": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "required": [
+        "expireTime",
+        "user"
+      ]
+    }
+  }
+}

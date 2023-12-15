@@ -1,0 +1,50 @@
+{
+  "path": "/api/profiles",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "profileImageUrl": {
+              "type": "string"
+            },
+            "intros": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "introPropertyId": {
+                    "type": "string"
+                  },
+                  "isPublic": {
+                    "type": "boolean"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "profile"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "path": "/api/profiles/profile-image",
+  "method": "POST",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "profileImageUrl": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

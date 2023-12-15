@@ -7,7 +7,8 @@ export const StatusCode = {
 }
 
 export const Keywords = {
-    GARENA_COOKIE: 'garenaCookie'
+    GARENA_COOKIE: 'garenaCookie',
+    APIKEY: 'apiKey'
 }
 
 
@@ -15,11 +16,3 @@ export const ErrorCode = {
 
 }
 
-export const OAuthToken = {
-    SECRET_KEY: {"key": 'canhdc01'}
-}
-
-export const AccessToken = {
-    USER_01: "abc01",
-    USER_02: "abc02"
-}

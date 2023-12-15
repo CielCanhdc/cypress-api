@@ -1,0 +1,57 @@
+{
+  "path": "/api/stores",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "requiredExchangeableCurrency": {
+                "type": "number"
+              },
+              "used": {
+                "type": "number"
+              },
+              "limit": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "exchangedItemList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "storeItemId": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

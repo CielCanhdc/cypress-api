@@ -1,0 +1,22 @@
+{
+  "path": "/api/badges/me/pin",
+  "method": "POST",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "pinnedBadgeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "pinnedBadgeIds"
+      ]
+    }
+  }
+}

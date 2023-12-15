@@ -1,20 +1,23 @@
 import { userExtraInfo } from "../support/fake-data"
 
-describe('POST - user update', () => {
+describe('Test Feeds', () => {
   before(() => {
     cy.fixture('account-infos').then((account) => {
       cy.loginTest(account.data[0].admin.accessToken)
     })
   })
 
+  it ('creat feed', () => {
 
-  it ('test get reward infos successfully', () => {
+  })
+
+  it ('get my feed', () => {
     // Prepare  
     let customPayload;
     const fakedData = userExtraInfo();
-  
 
-    cy.fixture('user-update').then((data) => {
+    cy.fixture('user-update')
+    .then((data) => {
       customPayload = data.payload;
       for (const key in customPayload) {
           if (fakedData.hasOwnProperty(key)) customPayload[key] = fakedData[key]
@@ -24,7 +27,7 @@ describe('POST - user update', () => {
           method: data.method,
           url: data.path,
           body: customPayload
-      }).as('update')
+      })
       .then((resp) => {
           console.log('resp update:>> ', resp);
           expect(resp.body.payload.user_infos.mail).to.eq(customPayload.mail)
@@ -47,4 +50,38 @@ describe('POST - user update', () => {
       
 
   })
+
+  it ('get friend feed', () => {
+
+  })
+
+  it ('react my feed ', () => {
+
+  })
+
+  it ('react friend feed ', () => {
+
+  })
+
+  it ('comment my feed ', () => {
+
+  })
+
+  it ('comment friend feed ', () => {
+
+  })
+
+  it ('comment mention friend feed ', () => {
+
+  })
+
+  it ('update my feed', () => {
+
+  })
+
+  it ('delete my feed', () => {
+
+  })
+
+
 }) 

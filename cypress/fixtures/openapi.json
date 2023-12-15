@@ -124,7 +124,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -214,7 +214,98 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/feeds/comment": {
+            "delete": {
+                "operationId": "DeleteComment",
+                "parameters": [
+                    {
+                        "name": "clientToken",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "commentId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DeleteComment 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "InvalidInputError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CreateComment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCommentRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "CreateComment 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateCommentResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -269,7 +360,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -306,7 +397,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -315,6 +406,95 @@
             }
         },
         "/api/feeds/post": {
+            "delete": {
+                "operationId": "DeletePost",
+                "parameters": [
+                    {
+                        "name": "clientToken",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "postId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DeletePost 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "InvalidInputError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            },
+            "get": {
+                "operationId": "GetPost",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetPost 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPostResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "InvalidInputError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            },
             "put": {
                 "operationId": "CreatePost",
                 "requestBody": {
@@ -352,7 +532,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidActionError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -407,7 +587,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -444,7 +624,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -533,7 +713,7 @@
                         "description": "InvalidAuthException 401 response"
                     },
                     "422": {
-                        "description": "UserNotFoundError 422 response"
+                        "description": "InvalidInputError 422 response"
                     },
                     "429": {
                         "description": "TooManyRequestError 429 response"
@@ -593,6 +773,123 @@
                 "responses": {
                     "200": {
                         "description": "ToogleMyPinKudos 200 response"
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/kudos/recent": {
+            "get": {
+                "operationId": "GetRecentKudos",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetRecentKudos 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetRecentKudosResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/luckydraw": {
+            "get": {
+                "operationId": "GetLuckyDrawConfig",
+                "responses": {
+                    "200": {
+                        "description": "GetLuckyDrawConfig 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLuckyDrawConfigResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationException 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationExceptionResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "InvalidAuthException 401 response"
+                    },
+                    "422": {
+                        "description": "UserNotFoundError 422 response"
+                    },
+                    "429": {
+                        "description": "TooManyRequestError 429 response"
+                    }
+                }
+            }
+        },
+        "/api/luckydraw/spin": {
+            "post": {
+                "operationId": "SpinLuckyDraw",
+                "responses": {
+                    "200": {
+                        "description": "SpinLuckyDraw 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SpinLuckyDrawResponseContent"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "ValidationException 400 response",
@@ -1281,6 +1578,9 @@
                     "id": {
                         "type": "string"
                     },
+                    "userId": {
+                        "type": "string"
+                    },
                     "postId": {
                         "type": "string"
                     },
@@ -1289,12 +1589,17 @@
                     },
                     "reactionMap": {
                         "$ref": "#/components/schemas/ReactionMap"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
                     }
                 }
             },
             "ContentCategory": {
                 "type": "string",
                 "enum": [
+                    "ALL",
                     "FEED",
                     "KUDOS",
                     "BADGE",
@@ -1332,6 +1637,36 @@
                     "clientToken",
                     "commentId",
                     "reactionType"
+                ]
+            },
+            "CreateCommentRequestContent": {
+                "type": "object",
+                "properties": {
+                    "clientToken": {
+                        "type": "string"
+                    },
+                    "postId": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "clientToken",
+                    "content",
+                    "postId"
+                ]
+            },
+            "CreateCommentResponseContent": {
+                "type": "object",
+                "properties": {
+                    "comment": {
+                        "$ref": "#/components/schemas/Comment"
+                    }
+                },
+                "required": [
+                    "comment"
                 ]
             },
             "CreatePostReactionRequestContent": {
@@ -1402,6 +1737,22 @@
                     "storeItemId"
                 ]
             },
+            "ExternalContentUnion": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "title": "kudos",
+                        "properties": {
+                            "kudos": {
+                                "$ref": "#/components/schemas/Kudos"
+                            }
+                        },
+                        "required": [
+                            "kudos"
+                        ]
+                    }
+                ]
+            },
             "GetFeedResponseContent": {
                 "type": "object",
                 "properties": {
@@ -1409,6 +1760,38 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Post"
+                        }
+                    },
+                    "totalPage": {
+                        "type": "number"
+                    }
+                }
+            },
+            "GetLuckyDrawConfigResponseContent": {
+                "type": "object",
+                "properties": {
+                    "candidates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LuckyDrawItem"
+                        }
+                    },
+                    "winners": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Winner"
+                        }
+                    },
+                    "currentSpinItems": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LuckyDrawItem"
                         }
                     }
                 }
@@ -1488,6 +1871,14 @@
                     }
                 }
             },
+            "GetPostResponseContent": {
+                "type": "object",
+                "properties": {
+                    "post": {
+                        "$ref": "#/components/schemas/Post"
+                    }
+                }
+            },
             "GetProfileConfigResponseContent": {
                 "type": "object",
                 "properties": {
@@ -1521,6 +1912,17 @@
                 "required": [
                     "profile"
                 ]
+            },
+            "GetRecentKudosResponseContent": {
+                "type": "object",
+                "properties": {
+                    "kudos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Kudos"
+                        }
+                    }
+                }
             },
             "GetStoreConfigResponseContent": {
                 "type": "object",
@@ -1672,6 +2074,23 @@
                     "apiKey"
                 ]
             },
+            "LuckyDrawItem": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "rank": {
+                        "type": "number"
+                    }
+                }
+            },
             "MiniProfile": {
                 "type": "object",
                 "properties": {
@@ -1788,6 +2207,9 @@
                     },
                     "content": {
                         "type": "string"
+                    },
+                    "externalContent": {
+                        "$ref": "#/components/schemas/ExternalContentUnion"
                     },
                     "imageUrls": {
                         "type": "array",
@@ -1915,6 +2337,17 @@
                     "kudos"
                 ]
             },
+            "SpinLuckyDrawResponseContent": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Winner"
+                        }
+                    }
+                }
+            },
             "StoreItem": {
                 "type": "object",
                 "properties": {
@@ -1925,6 +2358,12 @@
                         "type": "string"
                     },
                     "requiredExchangeableCurrency": {
+                        "type": "number"
+                    },
+                    "used": {
+                        "type": "number"
+                    },
+                    "limit": {
                         "type": "number"
                     }
                 }
@@ -2053,6 +2492,9 @@
                     "lastLogin": {
                         "type": "number",
                         "format": "double"
+                    },
+                    "isAdmin": {
+                        "type": "boolean"
                     },
                     "createdAt": {
                         "type": "number",
@@ -2214,6 +2656,30 @@
                 "required": [
                     "message"
                 ]
+            },
+            "Winner": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "userEmail": {
+                        "type": "string"
+                    },
+                    "userName": {
+                        "type": "string"
+                    },
+                    "luckyDrawItemId": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
             }
         },
         "securitySchemes": {

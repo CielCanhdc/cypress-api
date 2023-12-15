@@ -1,6 +1,0 @@
-{
-    "path": "/api/user/get",
-    "method": "GET",
-    "payload": {},
-    "resp": {}
-}

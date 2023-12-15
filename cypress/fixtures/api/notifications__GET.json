@@ -1,0 +1,71 @@
+{
+  "path": "/api/notifications",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "isRead": {
+                "type": "boolean"
+              },
+              "actorUserId": {
+                "type": "string"
+              },
+              "receiverUserId": {
+                "type": "string"
+              },
+              "contentSource": {
+                "type": "object",
+                "properties": {
+                  "contentId": {
+                    "type": "string"
+                  },
+                  "contentCategory": {
+                    "type": "string",
+                    "enum": [
+                      "ALL",
+                      "FEED",
+                      "KUDOS",
+                      "BADGE",
+                      "CURRENCY"
+                    ]
+                  },
+                  "createdUserId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "notificationContentType": {
+                "type": "string",
+                "enum": [
+                  "NEW_FEED_POST",
+                  "COMMENT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_COMMENT",
+                  "SEND_KUDOS_TO_YOU",
+                  "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "RECEIVE_NEW_BADGE"
+                ]
+              },
+              "data": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

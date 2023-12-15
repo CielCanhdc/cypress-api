@@ -1,10 +1,8 @@
 const { defineConfig } = require("cypress");
 
-
-
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "https://daisu.ff.garena.vn",
+    baseUrl: "https://garenavnsocial.web.test.freefiremobile.com",
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

@@ -1,0 +1,66 @@
+{
+  "path": "/api/notifications/read",
+  "method": "POST",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "notificationContentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "NEW_FEED_POST",
+              "COMMENT_TO_YOUR_POST",
+              "REACT_TO_YOUR_POST",
+              "REACT_TO_YOUR_COMMENT",
+              "SEND_KUDOS_TO_YOU",
+              "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+              "RECEIVE_NEW_BADGE"
+            ]
+          }
+        },
+        "userDeniedNotificationConfig": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "notificationChannel": {
+              "type": "string",
+              "enum": [
+                "SEA_TALK",
+                "PUSH"
+              ]
+            },
+            "isDenyAll": {
+              "type": "boolean"
+            },
+            "deniedNotificationContentList": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "NEW_FEED_POST",
+                  "COMMENT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_POST",
+                  "REACT_TO_YOUR_COMMENT",
+                  "SEND_KUDOS_TO_YOU",
+                  "COMMENT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "REACT_TO_YOUR_RECEIVE_KUDOS_POST",
+                  "RECEIVE_NEW_BADGE"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

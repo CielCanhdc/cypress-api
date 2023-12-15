@@ -1,6 +1,6 @@
 import { StatusCode } from "../support/constants"
 
-describe('template spec', () => {
+describe('Test Badge', () => {
 
   before(() => {
     cy.fixture('account-infos').then((account) => {
@@ -8,7 +8,7 @@ describe('template spec', () => {
     })
   })
   
-  it('test get user data successfully', () => {
+  it('get my badge', () => {
 
     cy.fixture('user-get').then((data) => {
       cy.api({
@@ -20,4 +20,13 @@ describe('template spec', () => {
       })
     })
   })
+
+  it ('pin my badge', () => {
+  
+  })
+  
+  it (' - pin the unowned badge', () => {
+  
+  })
+
 })

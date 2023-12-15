@@ -1,0 +1,45 @@
+{
+  "path": "/api/currencies/me",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "userCurrency": {
+          "type": "object",
+          "properties": {
+            "userSendableCurrency": {
+              "type": "object",
+              "properties": {
+                "sendableCurrency": {
+                  "type": "number"
+                },
+                "expireTime": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            },
+            "userExchangableCurrency": {
+              "type": "object",
+              "properties": {
+                "exchangeableCurrency": {
+                  "type": "number"
+                },
+                "expiringAmount": {
+                  "type": "number"
+                },
+                "expiringOn": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

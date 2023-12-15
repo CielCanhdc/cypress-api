@@ -1,0 +1,19 @@
+{
+  "path": "/auth/logout",
+  "method": "POST",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "apiKey"
+      ]
+    }
+  }
+}

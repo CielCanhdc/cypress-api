@@ -1,0 +1,159 @@
+{
+  "path": "/api/feeds/post/reaction",
+  "method": "DELETE",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "post": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "isAdminPost": {
+              "type": "boolean"
+            },
+            "postByUserId": {
+              "type": "string"
+            },
+            "contentSource": {
+              "type": "object",
+              "properties": {
+                "contentId": {
+                  "type": "string"
+                },
+                "contentCategory": {
+                  "type": "string",
+                  "enum": [
+                    "ALL",
+                    "FEED",
+                    "KUDOS",
+                    "BADGE",
+                    "CURRENCY"
+                  ]
+                },
+                "createdUserId": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "type": "string"
+            },
+            "externalContent": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "title": "kudos",
+                  "properties": {
+                    "kudos": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "fromUserId": {
+                          "type": "string"
+                        },
+                        "toUserId": {
+                          "type": "string"
+                        },
+                        "audienceMode": {
+                          "type": "string",
+                          "enum": [
+                            "PUBLIC",
+                            "PRIVATE"
+                          ]
+                        },
+                        "sendableCurrency": {
+                          "type": "number"
+                        },
+                        "hashTags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "imageUrl": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "number",
+                          "format": "double"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "kudos"
+                  ]
+                }
+              ]
+            },
+            "imageUrls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "reactionMap": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "comments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  },
+                  "postId": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "reactionMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "createdAt": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            },
+            "canComment": {
+              "type": "boolean"
+            },
+            "createdAt": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "path": "/api/luckydraw",
+  "method": "GET",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "rank": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "winners": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "userName": {
+                "type": "string"
+              },
+              "luckyDrawItemId": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "currentSpinItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "rank": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

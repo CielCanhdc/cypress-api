@@ -1,0 +1,40 @@
+{
+  "path": "/api/luckydraw/spin",
+  "method": "POST",
+  "payload": {},
+  "resp": {},
+  "schema": {
+    "200": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "userName": {
+                "type": "string"
+              },
+              "luckyDrawItemId": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
