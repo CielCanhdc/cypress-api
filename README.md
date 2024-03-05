@@ -5,7 +5,11 @@
 * Install dependencies
 ```npm install```
 ## Prerequisite
- 
+ - Dereference
+const $RefParser = require('json-schema-ref-parser');
+$RefParser.dereference('./cypress/fixtures/openapi.json', (err, data) => {
+
+
   - Export schema above file to pieces fixture files: ```node ./cypress/common/export-openapi-to-fixtures.js```
 
 ## Execution 
